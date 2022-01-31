@@ -2,7 +2,7 @@ import { ListGroup, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { completedTodo, removeTodo } from '../Store/actions';
 
-export default ({ note }) => {
+const Note = ({ note }) => {
     const dispatch = useDispatch();
     const remove = () => dispatch(removeTodo(note.id));
     const done = () => dispatch(completedTodo(note.id));
@@ -28,3 +28,5 @@ export default ({ note }) => {
         </ListGroup>
     );
 };
+
+export default Note;

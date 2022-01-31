@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Note from './Note';
 import { addTodo } from '../Store/actions';
 
-export default () => {
+const Notes = () => {
     const { todos } = useSelector(state => state);
     const dispatch = useDispatch();
     const onType = (e) => {
@@ -20,9 +20,26 @@ export default () => {
 
     return (
         <div>
+            <h2>All tasks</h2>
             <ListGroup as='ol' numbered>
                 {todos.map((todo) =>
                     (<Note key={Math.random() * 1000} id={todo.id} note={todo} />))}
+            </ListGroup>
+
+            <h3>Uncompleted tasks</h3>
+            <ListGroup as="ol" numbered>
+                {todos.filter((todo) =>
+                    (todo.done === false))
+                    .map((todo) =>
+                        (<Note key={Math.random() * 1000} note={todo} />))}
+            </ListGroup>
+
+            <h3>Completed tasks</h3>
+            <ListGroup as="ol" numbered>
+                {todos.filter((todo) =>
+                    (todo.done === true))
+                    .map((todo) =>
+                        (<Note key={Math.random() * 1000} note={todo} />))}
             </ListGroup>
 
             <InputGroup size='sm' className='mb-3'>
@@ -38,3 +55,5 @@ export default () => {
         </div>
     );
 };
+
+export default Notes;
